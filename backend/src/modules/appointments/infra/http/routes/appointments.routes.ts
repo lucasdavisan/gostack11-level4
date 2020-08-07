@@ -7,7 +7,6 @@ import CreateAppointmentService from '@modules/appointments/services/CreateAppoi
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 
 const appointmentsRouter = Router();
-const appointmentsRepository = new AppointmentsRepository();
 
 /** Route: should always be concerned with receiving the requisiton,
  *  call another file and return a response. Otherwise we must be
@@ -26,6 +25,7 @@ appointmentsRouter.post('/', async (request, response) => {
 
 	const parsedDate = parseISO(date);
 
+	const appointmentsRepository = new AppointmentsRepository();
 	const createAppointment = new CreateAppointmentService(
 		appointmentsRepository,
 	);
